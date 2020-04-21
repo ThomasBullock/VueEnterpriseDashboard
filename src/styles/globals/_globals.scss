@@ -1,0 +1,63 @@
+/******************* 
+  global styles
+*******************/
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  color: $oil;
+}
+
+/******************* 
+  Utility Classes
+*******************/
+
+.truncate {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.base-margin-top {
+  margin-top: $base-spacing;
+}
+
+.base-margin-bottom {
+  margin-bottom: $base-spacing;
+}
+
+.base-margin-left {
+  margin-left: $base-spacing;
+}
+
+.base-margin-right {
+  margin-right: $base-spacing;
+}
+
+// hide text for accessibility
+.is-accessibly-hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}

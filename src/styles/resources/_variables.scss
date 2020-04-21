@@ -1,0 +1,51 @@
+// Colours
+
+$white: #ffffff !default;
+$ghost: #fafafa !default;
+$snow: #f9f9f9 !default;
+$vapor: #f6f6f6 !default;
+$white-smoke: #f5f5f5 !default;
+$silver: #efefef !default;
+$smoke: #eeeeee !default;
+$gainsboro: #dddddd !default;
+$iron: #cccccc !default;
+$base: #aaaaaa !default;
+$aluminum: #999999 !default;
+$jumbo: #888888 !default;
+$monsoon: #777777 !default;
+$steel: #666666 !default;
+$charcoal: #555555 !default;
+$tuatara: #444444 !default;
+$oil: #333333 !default;
+$jet: #222222 !default;
+$black: #000000 !default;
+
+// function to convert media px statements to em.
+@function media-px-to-em($px) {
+  @return $px / ($px * 0 + 1) / 16 * 1em;
+}
+
+//Breakpoints
+$large-screen-up: media-px-to-em(1281px) !default;
+
+// Grids
+$grid--desktop-lg-up: "(min-width: #{$large-screen-up})";
+
+// Typography
+$base-font-family: "Roboto", sans-serif;
+$heading-font-family: $base-font-family;
+
+$weight-light: 300;
+$weight-normal: 400;
+$weight-bold: 700;
+
+// base font size of html element
+$rootsize-base: 12;
+$rootsize-lg: 14;
+
+// Spacing
+$base-spacing: 1rem;
+
+// Animations
+$base-duration: 250ms;
+$base-timing: ease;

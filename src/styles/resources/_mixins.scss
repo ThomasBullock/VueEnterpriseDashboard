@@ -1,0 +1,5 @@
+@mixin grid-media($media) {
+  @media #{$media} {
+    @content;
+  }
+}
