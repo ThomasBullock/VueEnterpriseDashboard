@@ -7,10 +7,20 @@ import store from "./store";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
 
-import { MdButton, MdContent, MdTabs } from "vue-material/dist/components";
+import {
+  MdButton,
+  MdCard,
+  MdContent,
+  MdTabs,
+  MdField,
+  // MdInput,
+} from "vue-material/dist/components";
 Vue.use(MdButton);
+Vue.use(MdCard);
 Vue.use(MdContent);
 Vue.use(MdTabs);
+Vue.use(MdField);
+// Vue.use(MdInput);
 
 // Custom Styles
 import "@/styles/main.scss";

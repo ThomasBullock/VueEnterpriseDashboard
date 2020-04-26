@@ -3,3 +3,11 @@
     @content;
   }
 }
+
+@mixin page() {
+  padding: $base-spacing * 2;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+}
