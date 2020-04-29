@@ -1,11 +1,11 @@
 import store from "../store";
 
 const requestInterceptor = (config) => {
-  if (store.state.user.isLoggedIn) {
-    config.headers[
-      store.state.config.jwtHeader
-    ] = `${store.state.config.jwtPrefix} ${store.state.user.token}`;
+  if (store.state.user.token) {
+    config.headers["Authorization"] = `${store.state.user.token}`;
   }
 
   return config;
 };
+
+export { requestInterceptor };

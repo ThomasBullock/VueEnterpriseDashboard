@@ -3,13 +3,24 @@ import authApi from "@/api/auth";
 const users = {
   namespaced: true,
   state: {
+    id: null,
+    name: null,
     token: null,
+  },
+  getters: {
+    isAuthenticated(state) {
+      return state.token != null;
+    },
   },
   mutations: {
     SET_USER(state, user) {
+      state.id = user.id;
+      state.name = user.name;
       state.token = user.token;
     },
     CLEAR_USER(state) {
+      state.id = null;
+      state.name = null;
       state.token = null;
     },
   },
@@ -34,11 +45,6 @@ const users = {
           console.log(res);
           commit("SET_USER", res);
         });
-    },
-  },
-  getters: {
-    isAuthenticated(state) {
-      return state.token != null;
     },
   },
 };
