@@ -11,8 +11,9 @@
             >Go to Subpage 2</md-list-item
           >
         </md-list>
-      </md-tab> -->
+      </md-tab>-->
       <md-tab id="tab-about" md-label="About" to="/about"></md-tab>
+      <md-tab id="tab-players" md-label="Players" to="/players"></md-tab>
       <!-- <md-tab
         id="tab-favorites"
         md-label="Favorites"
@@ -27,14 +28,14 @@
       >
       <md-tab id="tab-pages-2" md-label="Pages 2" to="/components/tabs/pages/2"
         >Subpage 2</md-tab
-      > -->
+      >-->
     </md-tabs>
   </div>
 </template>
 
 <script>
 export default {
-  name: "NavBar",
+  name: "NavBar"
 };
 </script>
 

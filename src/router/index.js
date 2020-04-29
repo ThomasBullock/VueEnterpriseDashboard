@@ -41,6 +41,32 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "about" */ "../views/About.vue"),
       },
+      {
+        path: "/players",
+        name: "Players",
+        children: [
+          {
+            path: "list",
+            name: "PlayersList",
+            component: () =>
+              import(
+                /* webpackChunkName: "new-player" */ "../views/players/list/PlayersList.vue"
+              ),
+          },
+          {
+            path: "new",
+            name: "NewPlayer",
+            component: () =>
+              import(
+                /* webpackChunkName: "new-player" */ "../views/players/new/NewPlayer.vue"
+              ),
+          },
+        ],
+        component: () =>
+          import(
+            /* webpackChunkName: "player" */ "../views/players/Players.vue"
+          ),
+      },
     ],
   },
 ];
