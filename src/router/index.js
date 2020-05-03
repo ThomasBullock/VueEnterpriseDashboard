@@ -4,6 +4,8 @@ import Dashboard from "../views/Dashboard.vue";
 import Auth from "../views/auth/Auth.vue";
 import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register.vue";
+import Teams from "@/views/teams/Teams.vue";
+import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -31,7 +33,32 @@ const routes = [
     path: "/",
     name: "Dashboard",
     component: Dashboard,
+    beforeEnter(to, from, next) {
+      store.dispatch("init").then(() => {
+        const isAuthenticated = store.getters["users/isAuthenticated"];
+        console.log(`beforeEnter ${isAuthenticated}`);
+        if (!isAuthenticated) {
+          next({ name: "Login" });
+        } else {
+          next();
+        }
+      });
+    },
+    redirect: { name: "Teams" },
     children: [
+      {
+        path: "account",
+        name: "Account",
+        component: () =>
+          import(
+            /* webpackChunkName: "new-player" */ "../views/account/Account.vue"
+          ),
+      },
+      {
+        path: "/teams",
+        name: "Teams",
+        component: Teams,
+      },
       {
         path: "/about",
         name: "About",
@@ -74,5 +101,17 @@ const routes = [
 const router = new VueRouter({
   routes,
 });
+
+// router.beforeEach((to, from, next) => {
+//   console.log(to);
+//   const isAuthenticated = store.getters["users/isAuthenticated"];
+//   if ((to.name !== "Login" || to.name !== "Register") && !isAuthenticated) {
+//     next({ name: "Login" });
+//   } else {
+//     next();
+//   }
+//   // console.log(isAuthenticated);
+//   // next();
+// });
 
 export default router;

@@ -54,7 +54,9 @@ export default {
       }
     },
     login() {
-      this.$store.dispatch("users/login", this.form);
+      this.$store.dispatch("users/login", this.form).then(() => {
+        this.$router.push("/");
+      });
     }
   }
 };

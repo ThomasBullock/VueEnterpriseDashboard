@@ -11,17 +11,29 @@ const users = {
     isAuthenticated(state) {
       return state.token != null;
     },
+    userData(state) {
+      return {
+        name: state.name,
+      };
+    },
   },
   mutations: {
+    SET_TOKEN(state, token) {
+      localStorage.setItem("access_token", token);
+      state.token = token;
+    },
+    CLEAR_TOKEN(state) {
+      localStorage.removeItem("access_token");
+      state.token = null;
+    },
     SET_USER(state, user) {
+      console.log("SET_USER", user);
       state.id = user.id;
       state.name = user.name;
-      state.token = user.token;
     },
     CLEAR_USER(state) {
       state.id = null;
       state.name = null;
-      state.token = null;
     },
   },
   actions: {
@@ -33,8 +45,16 @@ const users = {
         })
         .then((res) => {
           console.log(res);
+          commit("SET_TOKEN", res.token);
           commit("SET_USER", res);
+          return res;
         });
+    },
+    logout: ({ commit }) => {
+      console.log("logout");
+      commit("CLEAR_TOKEN");
+      commit("CLEAR_USER");
+      return;
     },
     register: ({ commit }, userDetails) => {
       return authApi

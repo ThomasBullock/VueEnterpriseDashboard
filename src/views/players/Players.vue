@@ -12,7 +12,12 @@
 
 <script>
 export default {
-  name: "Players"
+  name: "Players",
+  created() {
+    this.$store.dispatch("teams/getAll").then(res => {
+      console.log(res);
+    });
+  }
 };
 </script>
 
