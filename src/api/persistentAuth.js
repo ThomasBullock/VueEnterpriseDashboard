@@ -1,4 +1,5 @@
 import store from "../store";
+import router from "../router";
 
 const requestInterceptor = (config) => {
   if (store.getters["users/isAuthenticated"]) {
@@ -8,4 +9,18 @@ const requestInterceptor = (config) => {
   return config;
 };
 
-export { requestInterceptor };
+const responseInterceptor = (response) => {
+  return response;
+};
+
+const errorInterceptor = (error) => {
+  console.log(error.response);
+  if (error.response && error.response.status === 401) {
+    store.dispatch("users/logout").then(() => {
+      router.push({ name: "Login" });
+    });
+  }
+  return Promise.reject(error);
+};
+
+export { requestInterceptor, responseInterceptor, errorInterceptor };

@@ -1,5 +1,9 @@
 import axios from "axios";
-import { requestInterceptor } from "./persistentAuth";
+import {
+  requestInterceptor,
+  responseInterceptor,
+  errorInterceptor,
+} from "./persistentAuth";
 
 const url =
   process.env.NODE_ENV === "development"
@@ -10,5 +14,6 @@ const httpService = axios.create({
 });
 
 httpService.interceptors.request.use(requestInterceptor);
+httpService.interceptors.response.use(responseInterceptor, errorInterceptor);
 
 export default httpService;

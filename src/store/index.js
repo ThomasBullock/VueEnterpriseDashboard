@@ -28,13 +28,18 @@ export default new Vuex.Store({
   actions: {
     fetchDashboard: ({ commit }) => {
       commit("SET_IS_LOADING", true);
-      api.fetchDashboard("/dashboard").then((res) => {
-        console.log(res, commit);
-        commit("users/SET_USER", res.user, { root: true });
-        commit("teams/SET", res.teams, { root: true });
-        commit("SET_DASHBOARD_IS_LOADED");
-        commit("SET_IS_LOADING", false);
-      });
+      api
+        .fetchDashboard("/dashboard")
+        .then((res) => {
+          console.log(res, commit);
+          commit("users/SET_USER", res.user, { root: true });
+          commit("teams/SET", res.teams, { root: true });
+          commit("SET_DASHBOARD_IS_LOADED");
+          commit("SET_IS_LOADING", false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     init: ({ commit }) => {
       const token = localStorage.getItem("access_token");
