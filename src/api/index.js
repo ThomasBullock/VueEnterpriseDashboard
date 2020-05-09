@@ -9,7 +9,7 @@ function makeCrud(resource) {
     get: (id) => http.get(`${resource}/${id}`).then((res) => res.data),
     post: (data) => http.post(`${resource}`, data).then((res) => res.data),
     put: (data) =>
-      http.put(`${resource}/${data.id}`, data).then((res) => res.data),
+      http.put(`${resource}/${data._id}`, data).then((res) => res.data),
     delete: (id) => http.delete(`${resource}/${id}`).then((res) => res.data),
     customRequest: (data) => http(data).then((res) => res.data),
   };

@@ -1,5 +1,6 @@
 <template>
-  <div class="new-player">
+  <div>
+    <h2>Edit Player</h2>
     <form @submit.prevent="validate">
       <md-field>
         <label for="name">Name</label>
@@ -60,7 +61,7 @@
           >{{status.name}}</md-option>
         </md-select>
       </md-field>
-      <md-button type="submit" class="md-primary" :disabled="isCreating">Create player</md-button>
+      <md-button type="submit" class="md-primary" :disabled="isSending">Update player</md-button>
     </form>
   </div>
 </template>
@@ -76,21 +77,18 @@ import {
 import { STATUSES, POSITIONS } from "@/constants";
 
 export default {
-  name: "NewPlayer",
+  name: "EditPlayer",
   mixins: [validationMixin],
+  props: {
+    playerId: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
-      form: {
-        name: "Thomas",
-        surname: "Bullock",
-        height: 180,
-        games: 1,
-        goals: 2,
-        dob: new Date("01-01-1990"),
-        teamId: null,
-        img: null
-      },
-      isCreating: false
+      form: {},
+      isSending: false
     };
   },
   validations: {
@@ -130,6 +128,9 @@ export default {
     }
   },
   computed: {
+    player() {
+      return this.$store.getters["players/getById"](this.playerId);
+    },
     teamsOptionList() {
       return Object.entries(this.$store.getters["teams/all"]).map(([, v]) => {
         return {
@@ -157,6 +158,7 @@ export default {
   },
   methods: {
     handleFile(e) {
+      // Todo should delete existing photo
       console.log(e);
       this.form.img = e[0];
     },
@@ -166,26 +168,33 @@ export default {
       console.log("isInvalid = " + this.$v.$invalid);
       if (!this.$v.$invalid) {
         //   console.log("login");
-        this.createPlayer();
+        this.updatePlayer();
       }
     },
-    createPlayer() {
-      this.isCreating = true;
+    updatePlayer() {
+      console.log("updateuy!");
+      this.isSending = true;
       this.$store
-        .dispatch("players/create", this.form)
+        .dispatch("players/updateOne", this.form)
         .then(() => {
-          this.isCreating = false;
-          this.displaySnackbar({ message: "created player" });
+          this.isSending = false;
+          this.displaySnackbar({ message: "updated player" });
           this.$router({ name: "PlayersList" });
         })
         .catch(err => {
           console.log(err);
-          this.isCreating = false;
+          this.isSending = false;
         });
     }
   },
   mounted() {
-    console.log(this);
+    // need to massage date data
+
+    this.form = (() => {
+      const player = this.player;
+      player.dob = new Date(this.player.dob);
+      return { ...player };
+    })();
   }
 };
 </script>

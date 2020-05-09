@@ -5,18 +5,36 @@
       <router-link :to="{ name: 'NewPlayer'}">Add Player</router-link>
     </nav>
     <main>
-      <router-view></router-view>
+      <router-view v-if="!isLoading"></router-view>
+      <div class="spinner-wrapper" v-else>
+        <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
+      </div>
     </main>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { isEmpty } from "@/helpers";
+
 export default {
   name: "Players",
+  data() {
+    return {
+      isLoading: true
+    };
+  },
+  computed: {
+    ...mapGetters("players", ["all"])
+  },
   created() {
-    this.$store.dispatch("teams/getAll").then(res => {
-      console.log(res);
-    });
+    if (isEmpty(this.all)) {
+      this.$store.dispatch("players/getAll").then(() => {
+        this.isLoading = false;
+      });
+    } else {
+      this.isLoading = false;
+    }
   }
 };
 </script>
@@ -35,5 +53,13 @@ export default {
   main {
     flex: 1 1 75%;
   }
+}
+
+// move this into global at some point
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
 }
 </style>

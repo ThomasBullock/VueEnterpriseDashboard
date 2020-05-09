@@ -75,6 +75,9 @@ const routes = [
           {
             path: "list",
             name: "PlayersList",
+            props: () => {
+              return { players: store.getters["players/all"] };
+            },
             component: () =>
               import(
                 /* webpackChunkName: "new-player" */ "../views/players/list/PlayersList.vue"
@@ -86,6 +89,24 @@ const routes = [
             component: () =>
               import(
                 /* webpackChunkName: "new-player" */ "../views/players/new/NewPlayer.vue"
+              ),
+          },
+          {
+            path: ":playerId",
+            name: "Player",
+            props: true,
+            component: () =>
+              import(
+                /* webpackChunkName: "new-player" */ "../views/players/player/Player.vue"
+              ),
+          },
+          {
+            path: "edit/:playerId",
+            name: "EditPlayer",
+            props: true,
+            component: () =>
+              import(
+                /* webpackChunkName: "new-player" */ "../views/players/edit/EditPlayer.vue"
               ),
           },
         ],

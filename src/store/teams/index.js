@@ -13,10 +13,8 @@ const teams = {
   },
   actions: {
     getAll: ({ commit }) => {
-      console.log("get");
       return api.teams.getAll().then((res) => {
         commit("SET", res);
-        console.log("yep", commit);
         return res;
       });
     },

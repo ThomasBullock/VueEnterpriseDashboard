@@ -3,15 +3,18 @@ import Vuex from "vuex";
 import users from "./users";
 import players from "./players";
 import teams from "./teams";
+import ui from "./ui";
 import api from "@/api/";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  // strict: process.env.NODE_ENV !== "production",
   modules: {
     users,
     players,
     teams,
+    ui,
   },
   state: {
     dashboardIsLoaded: false,
@@ -26,7 +29,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    fetchDashboard: ({ commit }) => {
+    fetchDashboard: ({ commit, dispatch }) => {
       commit("SET_IS_LOADING", true);
       api
         .fetchDashboard("/dashboard")
@@ -36,6 +39,9 @@ export default new Vuex.Store({
           commit("teams/SET", res.teams, { root: true });
           commit("SET_DASHBOARD_IS_LOADED");
           commit("SET_IS_LOADING", false);
+          dispatch("ui/displaySnackbar", {
+            message: "Dashboard succesfully loaded",
+          });
         })
         .catch((err) => {
           console.log(err);
