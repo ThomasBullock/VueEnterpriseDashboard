@@ -71,6 +71,7 @@ const routes = [
       {
         path: "/players",
         name: "Players",
+        redirect: { name: "PlayersList" },
         children: [
           {
             path: "list",

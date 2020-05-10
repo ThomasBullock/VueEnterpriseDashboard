@@ -179,7 +179,7 @@ export default {
         .then(() => {
           this.isSending = false;
           this.displaySnackbar({ message: "updated player" });
-          this.$router({ name: "PlayersList" });
+          this.$router.push({ name: "PlayersList" });
         })
         .catch(err => {
           console.log(err);

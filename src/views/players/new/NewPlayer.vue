@@ -176,7 +176,7 @@ export default {
         .then(() => {
           this.isCreating = false;
           this.displaySnackbar({ message: "created player" });
-          this.$router({ name: "PlayersList" });
+          this.$router.push({ name: "PlayersList" });
         })
         .catch(err => {
           console.log(err);

@@ -1,5 +1,6 @@
 import api from "@/api/";
 import cloudinary from "@/api/cloudinary";
+import Vue from "vue";
 
 const players = {
   namespaced: true,
@@ -8,8 +9,13 @@ const players = {
     SET(state, data) {
       console.log(data);
       data.forEach((item) => {
-        state[item._id] = item;
+        Vue.set(state, item._id, item);
+        // state[item._id] = item;
       });
+    },
+    DELETE(state, id) {
+      console.log(id);
+      Vue.delete(state, id);
     },
   },
   actions: {
@@ -62,6 +68,13 @@ const players = {
           commit("SET", [res]);
           return res;
         });
+      });
+    },
+    delete: ({ commit }, id) => {
+      console.log(id);
+      return api.players.delete(id).then(() => {
+        commit("DELETE", id);
+        return;
       });
     },
   },
