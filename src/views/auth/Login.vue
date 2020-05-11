@@ -10,9 +10,18 @@
           <label for="password">Password</label>
           <md-input name="password" type="password" v-model="form.password"></md-input>
         </md-field>
-        <md-button type="submit" class="md-primary" :disabled="sending">Login</md-button>
+        <md-card-actions>
+          <md-button type="submit" class="md-primary" :disabled="sending">Login</md-button>
+        </md-card-actions>
       </md-card>
     </form>
+    <md-card class="login__with form-card">
+      <img
+        class="google-logo"
+        src="https://i.pinimg.com/originals/d7/e1/55/d7e15567a2a05aa8899486730d656441.png"
+      />
+      <md-button type="submit" class="md-primary" :disabled="sending">Login with Google</md-button>
+    </md-card>
   </div>
 </template>
 
@@ -65,5 +74,18 @@ export default {
 <style lang="scss" scoped>
 .login {
   @include page;
+
+  flex-direction: column;
+  align-items: center;
+
+  &__with {
+    margin-top: $base-spacing;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .google-logo {
+    width: 48px;
+  }
 }
 </style>

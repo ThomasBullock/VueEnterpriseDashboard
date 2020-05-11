@@ -1,20 +1,57 @@
 <template>
   <div class="player">
-    <div v-if="!isDeleting">
-      <h2>{{player.number}}. {{ player.name}} {{ player.surname}}</h2>
-      <span>
-        <strong>Height:</strong>
-        {{player.height}}
-      </span>
-      <span>
-        <strong>Games:</strong>
-        {{player.games}}
-      </span>
-      <span>
-        <strong>Goals:</strong>
-        {{player.goals}}
-      </span>
-      <div class="player__actions">
+    <md-card v-if="!isDeleting">
+      <md-card-header>
+        <md-card-header-text>
+          <div class="md-title">{{player.name}} {{player.surname}}</div>
+          <div class="md-subhead">{{ player.position }}</div>
+        </md-card-header-text>
+
+        <md-card-media md-big>
+          <img :src="player.imgUrl" :alt="player.name + ' ' + player.surname" />
+        </md-card-media>
+      </md-card-header>
+      <md-card-content>
+        <span>
+          <strong>Height:</strong>
+          {{player.height}}
+        </span>
+        <span>
+          <strong>Games:</strong>
+          {{player.games}}
+        </span>
+        <span>
+          <strong>Goals:</strong>
+          {{player.goals}}
+        </span>
+      </md-card-content>
+
+      <!-- <md-card-area>
+        <md-card-media>
+          <img  />
+        </md-card-media>
+
+        <md-card-header>
+
+      </md-card-header>-->
+
+      <!-- <md-card-content>
+          <span>
+            <strong>Height:</strong>
+            {{player.height}}
+          </span>
+          <span>
+            <strong>Games:</strong>
+            {{player.games}}
+          </span>
+          <span>
+            <strong>Goals:</strong>
+            {{player.goals}}
+          </span>
+        </md-card-content>
+      </md-card-area>-->
+
+      <md-card-actions md-alignment="left">
         <md-button
           class="md-icon-button md-list-action"
           @click="$router.push(`edit/${player._id}`)"
@@ -24,8 +61,9 @@
         <md-button class="md-icon-button md-list-action" @click="handleDelete">
           <md-icon class="md-accent">delete</md-icon>
         </md-button>
-      </div>
-    </div>
+      </md-card-actions>
+    </md-card>
+
     <div class="spinner-wrapper" v-else>
       <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
     </div>
@@ -66,6 +104,19 @@ export default {
 .player {
   &__actions {
     margin-top: $base-spacing;
+  }
+
+  .md-card {
+    width: 620px;
+    margin: 4px;
+    display: inline-block;
+    vertical-align: top;
+
+    .md-card-media.md-big {
+      width: 240px;
+      height: 240px;
+      flex: 0 0 240px;
+    }
   }
 }
 </style>

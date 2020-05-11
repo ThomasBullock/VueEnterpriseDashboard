@@ -88,6 +88,12 @@ export default {
     handleSelectPlayer(id) {
       this.$router.push(id);
     }
+  },
+  mounted() {
+    if (this.$route.query.filter) {
+      this.filter = this.$route.query.filter;
+      console.log(this.$route.query.filter);
+    }
   }
 };
 </script>

@@ -13,8 +13,7 @@
       </md-card-header>
 
       <md-card-actions>
-        <md-button>Action</md-button>
-        <md-button>Action</md-button>
+        <md-button :to="`/players/list?filter=${team._id}`">View List</md-button>
       </md-card-actions>
     </md-card>
   </div>
@@ -41,5 +40,9 @@ export default {
 
 .teams__card {
   flex: 1 1 25%;
+}
+
+.md-card-actions {
+  margin-top: $base-spacing;
 }
 </style>
