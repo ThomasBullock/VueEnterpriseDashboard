@@ -2,8 +2,8 @@ import axios from "axios";
 
 const url =
   process.env.NODE_ENV === "development"
-    ? "api/"
-    : process.env.VUE_APP_ROOT_API;
+    ? "auth/"
+    : process.env.VUE_APP_ROOT_AUTH;
 const http = axios.create({
   baseURL: url,
 });

@@ -20,7 +20,12 @@
         class="google-logo"
         src="https://i.pinimg.com/originals/d7/e1/55/d7e15567a2a05aa8899486730d656441.png"
       />
-      <md-button type="submit" class="md-primary" :disabled="sending">Login with Google</md-button>
+      <md-button
+        type="button"
+        class="md-primary"
+        :disabled="sending"
+        @click="loginWithGoogle"
+      >Login with Google</md-button>
     </md-card>
   </div>
 </template>
@@ -64,6 +69,11 @@ export default {
     },
     login() {
       this.$store.dispatch("users/login", this.form).then(() => {
+        this.$router.push("/");
+      });
+    },
+    loginWithGoogle() {
+      this.$store.dispatch("users/loginWithGoogle").then(() => {
         this.$router.push("/");
       });
     }

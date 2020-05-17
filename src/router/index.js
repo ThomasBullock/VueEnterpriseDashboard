@@ -4,6 +4,7 @@ import Dashboard from "../views/Dashboard.vue";
 import Auth from "../views/auth/Auth.vue";
 import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register.vue";
+import Google from "../views/auth/Google.vue";
 import Teams from "@/views/teams/Teams.vue";
 import store from "../store";
 
@@ -25,6 +26,11 @@ const routes = [
         path: "register",
         name: "Register",
         component: Register,
+      },
+      {
+        path: "google",
+        name: "Google",
+        component: Google,
       },
     ],
   },

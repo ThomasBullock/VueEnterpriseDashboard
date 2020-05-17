@@ -50,6 +50,10 @@ const users = {
           return res;
         });
     },
+    loginWithGoogle: ({ commit }) => {
+      console.log(commit);
+      window.location = "http://localhost:3000/auth/google";
+    },
     logout: ({ commit }) => {
       console.log("logout");
       commit("CLEAR_TOKEN");
