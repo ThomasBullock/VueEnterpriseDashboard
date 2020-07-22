@@ -70,11 +70,8 @@ export default {
   },
   methods: {
     validate() {
-      console.log("validate");
       this.$v.$touch();
-      console.log("isInvalid = " + this.$v.$invalid);
       if (!this.$v.$invalid) {
-        //   console.log("login");
         this.register();
       }
     },

@@ -157,15 +157,11 @@ export default {
   },
   methods: {
     handleFile(e) {
-      console.log(e);
       this.form.img = e[0];
     },
     validate() {
-      console.log("validate");
       this.$v.$touch();
-      console.log("isInvalid = " + this.$v.$invalid);
       if (!this.$v.$invalid) {
-        //   console.log("login");
         this.createPlayer();
       }
     },
@@ -183,9 +179,6 @@ export default {
           this.isCreating = false;
         });
     }
-  },
-  mounted() {
-    console.log(this);
   }
 };
 </script>

@@ -64,8 +64,6 @@ export default {
         ? this.players
         : Object.keys(this.players)
             .filter(key => {
-              console.log(key);
-              console.log(this.players[key]);
               return this.players[key].teamId === this.filter;
             })
             .reduce((obj, key) => {
@@ -74,15 +72,7 @@ export default {
                 [key]: this.players[key]
               };
             }, {});
-      // : Object.keys(this.players)
-      //     .map(([, v]) => v)
-      //     .filter(player => player.teamId === this.filter);
     }
-    // filter: {
-    //   get() {
-
-    //   }
-    // }
   },
   methods: {
     handleSelectPlayer(id) {
@@ -92,7 +82,6 @@ export default {
   mounted() {
     if (this.$route.query.filter) {
       this.filter = this.$route.query.filter;
-      console.log(this.$route.query.filter);
     }
   }
 };

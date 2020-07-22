@@ -12,7 +12,6 @@
 // @ is an alias to /src
 import NavBar from "@/components/NavBar";
 import { mapGetters } from "vuex";
-// import { isEmpty } from "@/helpers";
 
 export default {
   name: "Dashboard",
