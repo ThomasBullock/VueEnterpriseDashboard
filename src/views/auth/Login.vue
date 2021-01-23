@@ -59,11 +59,8 @@ export default {
   },
   methods: {
     validateUser() {
-      console.log("validate");
       this.$v.$touch();
-      console.log(this.$v.$invalid);
       if (!this.$v.$invalid) {
-        console.log("login");
         this.login();
       }
     },

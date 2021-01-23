@@ -6,15 +6,14 @@ const users = {
     id: null,
     name: null,
     token: null,
+    avatar: null,
   },
   getters: {
     isAuthenticated(state) {
       return state.token != null;
     },
     userData(state) {
-      return {
-        name: state.name,
-      };
+      return state;
     },
   },
   mutations: {
@@ -28,8 +27,9 @@ const users = {
     },
     SET_USER(state, user) {
       console.log("SET_USER", user);
-      state.id = user.id;
+      state.id = user.id || user._id;
       state.name = user.name;
+      state.avatar = user.avatar;
     },
     CLEAR_USER(state) {
       state.id = null;

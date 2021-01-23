@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <div class="navbar md-elevation-3">
     <md-tabs md-sync-route class="navbar__tabs">
       <md-tab id="tab-teams" md-label="Teams" to="/teams" exact></md-tab>
       <md-tab id="tab-about" md-label="About" to="/about"></md-tab>
@@ -8,7 +8,10 @@
     <div class="navbar__user-actions">
       <md-menu md-size="big" md-direction="bottom-end">
         <md-button class="md-icon-button" md-menu-trigger>
-          <md-icon>account_circle</md-icon>
+          <md-avatar>
+            <img :src="userData.avatar" :alt="userData.name + ' avatar '" />
+          </md-avatar>
+          <!-- <md-icon>account_circle</md-icon> -->
         </md-button>
 
         <md-menu-content>
@@ -28,8 +31,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "NavBar",
+  computed: {
+    ...mapGetters("users", ["userData"]),
+  },
   methods: {
     handleLogout() {
       this.$store.dispatch("users/logout").then(() => {
@@ -38,8 +46,8 @@ export default {
     },
     handleGotoAccount() {
       this.$router.push({ name: "Account" });
-    }
-  }
+    },
+  },
 };
 </script>
 

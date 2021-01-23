@@ -1,8 +1,12 @@
 <template>
   <div class="players">
     <nav>
-      <router-link :to="{ name: 'PlayersList'}">Player List</router-link>
-      <router-link :to="{ name: 'NewPlayer'}">Add Player</router-link>
+      <router-link class="sidebar-link" :to="{ name: 'PlayersList' }"
+        >Player List</router-link
+      >
+      <router-link class="sidebar-link" :to="{ name: 'NewPlayer' }"
+        >Add Player</router-link
+      >
     </nav>
     <main>
       <router-view v-if="!isLoading"></router-view>
@@ -21,11 +25,11 @@ export default {
   name: "Players",
   data() {
     return {
-      isLoading: true
+      isLoading: true,
     };
   },
   computed: {
-    ...mapGetters("players", ["all"])
+    ...mapGetters("players", ["all"]),
   },
   created() {
     if (isEmpty(this.all)) {
@@ -35,7 +39,7 @@ export default {
     } else {
       this.isLoading = false;
     }
-  }
+  },
 };
 </script>
 
@@ -45,13 +49,16 @@ export default {
   display: flex;
 
   nav {
-    flex: 1 1 25%;
+    background: $white;
+    flex: 1 1 20%;
     display: flex;
     flex-direction: column;
+    padding-right: $base-spacing;
   }
 
   main {
-    flex: 1 1 75%;
+    flex: 1 1 80%;
+    padding: $base-spacing $large-spacing;
   }
 }
 
@@ -61,5 +68,10 @@ export default {
   justify-content: center;
   align-items: center;
   height: 90vh;
+}
+
+.sidebar-link {
+  padding: $base-spacing;
+  border-bottom: solid 1px $smoke;
 }
 </style>
