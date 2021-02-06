@@ -1,9 +1,9 @@
 <template>
   <div class="navbar md-elevation-3">
-    <md-tabs md-sync-route class="navbar__tabs">
+    <md-tabs md-sync-route class="navbar__tabs md-transparent">
       <md-tab id="tab-teams" md-label="Teams" to="/teams" exact></md-tab>
-      <md-tab id="tab-about" md-label="About" to="/about"></md-tab>
       <md-tab id="tab-players" md-label="Players" to="/players"></md-tab>
+      <md-tab id="tab-about" md-label="Insights" to="/insights"></md-tab>
     </md-tabs>
     <div class="navbar__user-actions">
       <md-menu md-size="big" md-direction="bottom-end">
@@ -53,7 +53,9 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  background: $white;
+  padding: 0 $base-spacing;
+  z-index: 1;
+  position: relative;
   display: flex;
   &__tabs {
     flex: 1 1 50%;
@@ -68,6 +70,10 @@ export default {
       margin-top: 4px;
       margin-right: 4px;
     }
+  }
+
+  .md-tabs.md-theme-default.md-tabs-navigation {
+    background-color: none !important;
   }
 }
 </style>

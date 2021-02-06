@@ -3,53 +3,32 @@
     <md-card v-if="!isDeleting">
       <md-card-header>
         <md-card-header-text>
-          <div class="md-title">{{player.name}} {{player.surname}}</div>
+          <div class="md-title">{{ player.name }} {{ player.surname }}</div>
+          <div class="md-subhead">{{ team.name }}</div>
           <div class="md-subhead">{{ player.position }}</div>
         </md-card-header-text>
 
         <md-card-media md-big>
-          <img :src="player.imgUrl" :alt="player.name + ' ' + player.surname" />
+          <img
+            :src="player.imgUrl ? player.imgUrl : DEFAULT_PLAYER_IMG"
+            :alt="player.name + ' ' + player.surname"
+          />
         </md-card-media>
       </md-card-header>
       <md-card-content>
         <span>
           <strong>Height:</strong>
-          {{player.height}}
+          {{ player.height }}cm
+        </span>
+        <span>
+          <strong>Weight:</strong>
+          {{ player.weight }}kg
         </span>
         <span>
           <strong>Games:</strong>
-          {{player.games}}
-        </span>
-        <span>
-          <strong>Goals:</strong>
-          {{player.goals}}
+          {{ player.games }}
         </span>
       </md-card-content>
-
-      <!-- <md-card-area>
-        <md-card-media>
-          <img  />
-        </md-card-media>
-
-        <md-card-header>
-
-      </md-card-header>-->
-
-      <!-- <md-card-content>
-          <span>
-            <strong>Height:</strong>
-            {{player.height}}
-          </span>
-          <span>
-            <strong>Games:</strong>
-            {{player.games}}
-          </span>
-          <span>
-            <strong>Goals:</strong>
-            {{player.goals}}
-          </span>
-        </md-card-content>
-      </md-card-area>-->
 
       <md-card-actions md-alignment="left">
         <md-button
@@ -71,23 +50,29 @@
 </template>
 
 <script>
+import { DEFAULT_PLAYER_IMG } from "@/constants";
+
 export default {
   name: "Player",
   props: {
     playerId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      isDeleting: false
+      isDeleting: false,
+      DEFAULT_PLAYER_IMG: DEFAULT_PLAYER_IMG,
     };
   },
   computed: {
     player() {
       return this.$store.getters["players/getById"](this.playerId);
-    }
+    },
+    team() {
+      return this.$store.getters["teams/teamById"](this.player.teamId);
+    },
   },
   methods: {
     handleDelete() {
@@ -95,8 +80,8 @@ export default {
       this.$store.dispatch("players/delete", this.player._id).then(() => {
         this.$router.push({ name: "PlayersList" });
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

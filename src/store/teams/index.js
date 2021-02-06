@@ -23,6 +23,9 @@ const teams = {
     all: (state) => {
       return state;
     },
+    teamById: (state) => (id) => {
+      return state[id];
+    },
   },
 };
 

@@ -16,11 +16,11 @@ import { mapGetters } from "vuex";
 export default {
   name: "Dashboard",
   components: {
-    NavBar
+    NavBar,
   },
   data() {
     return {
-      loading: false
+      loading: false,
     };
   },
 
@@ -30,13 +30,13 @@ export default {
       return (
         this.$store.state.dashboardIsLoaded && !this.$store.state.isLoading
       );
-    }
+    },
   },
   created() {
     if (!this.$store.state.dashboardIsLoaded) {
       this.$store.dispatch("fetchDashboard").then(() => {});
     }
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>

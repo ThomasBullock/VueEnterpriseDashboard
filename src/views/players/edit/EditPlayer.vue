@@ -2,53 +2,61 @@
   <div>
     <h2>Edit Player</h2>
     <form @submit.prevent="validate">
-      <md-field>
+      <md-field :class="getValidationClass('name')">
         <label for="name">Name</label>
         <md-input name="name" type="text" v-model="form.name"></md-input>
       </md-field>
-      <md-field>
+      <md-field :class="getValidationClass('surname')">
         <label for="surname">Surname</label>
-        <md-input name="surname" type="surname" v-model="form.surname"></md-input>
+        <md-input
+          name="surname"
+          type="surname"
+          v-model="form.surname"
+        ></md-input>
       </md-field>
-      <md-field>
+      <md-field :class="getValidationClass('number')">
         <label for="number">Number</label>
         <md-input name="number" type="number" v-model="form.number"></md-input>
       </md-field>
-      <md-field>
+      <md-field :class="getValidationClass('height')">
         <label for="height">Height</label>
         <md-input name="height" type="height" v-model="form.height"></md-input>
       </md-field>
-      <md-field>
+      <md-field :class="getValidationClass('games')">
         <label for="games">Games</label>
         <md-input name="games" type="games" v-model="form.games"></md-input>
       </md-field>
-      <md-field>
+      <!-- <md-field>
         <label for="goals">Goals</label>
         <md-input name="goals" type="goals" v-model="form.goals"></md-input>
-      </md-field>
-      <md-datepicker v-model="form.dob" />
+      </md-field> -->
+      <md-datepicker :class="getValidationClass('dob')" v-model="form.dob">
+        <label>Select D.O.B</label>
+      </md-datepicker>
       <md-field>
         <label>Player photo</label>
         <md-file accept="image/*" @md-change="handleFile" />
       </md-field>
-      <md-field>
+      <md-field :class="getValidationClass('position')">
         <label for="position">Position</label>
         <md-select v-model="form.position" name="position" id="position">
           <md-option
             v-for="position in positionOptionList"
             :value="position.value"
             :key="position.value"
-          >{{position.name}}</md-option>
+            >{{ position.name }}</md-option
+          >
         </md-select>
       </md-field>
-      <md-field>
+      <md-field :class="getValidationClass('teamId')">
         <label for="team">Team</label>
         <md-select v-model="form.teamId" name="team" id="team">
           <md-option
             v-for="team in teamsOptionList"
             :value="team.value"
             :key="team.value"
-          >{{team.name}}</md-option>
+            >{{ team.name }}</md-option
+          >
         </md-select>
       </md-field>
       <md-field>
@@ -58,10 +66,13 @@
             v-for="status in statusOptionList"
             :value="status.value"
             :key="status.value"
-          >{{status.name}}</md-option>
+            >{{ status.name }}</md-option
+          >
         </md-select>
       </md-field>
-      <md-button type="submit" class="md-primary" :disabled="isSending">Update player</md-button>
+      <md-button type="submit" class="md-primary" :disabled="isSending"
+        >Update player</md-button
+      >
     </form>
   </div>
 </template>
@@ -72,60 +83,61 @@ import {
   required,
   numeric,
   minLength,
-  maxLength
+  maxLength,
 } from "vuelidate/lib/validators";
 import { STATUSES, POSITIONS } from "@/constants";
+import validationMethods from "@/mixins/validationMethods";
 
 export default {
   name: "EditPlayer",
-  mixins: [validationMixin],
+  mixins: [validationMixin, validationMethods],
   props: {
     playerId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       form: {},
-      isSending: false
+      isSending: false,
     };
   },
   validations: {
     form: {
       name: {
         required,
-        maxLength: maxLength(50)
+        maxLength: maxLength(50),
       },
       surname: {
         required,
-        maxLength: maxLength(50)
+        maxLength: maxLength(50),
       },
       number: {
         required,
         maxLength: maxLength(2),
-        numeric
+        numeric,
       },
       height: {
         required,
         minLength: minLength(3),
-        numeric
+        numeric,
       },
       games: {
         required,
-        numeric
+        numeric,
       },
       goals: {
         required,
-        numeric
+        numeric,
       },
       img: {
-        required
+        required,
       },
       teamId: {
-        required
-      }
-    }
+        required,
+      },
+    },
   },
   computed: {
     player() {
@@ -135,26 +147,26 @@ export default {
       return Object.entries(this.$store.getters["teams/all"]).map(([, v]) => {
         return {
           value: v._id,
-          name: v.name
+          name: v.name,
         };
       });
     },
     statusOptionList() {
-      return STATUSES.map(v => {
+      return STATUSES.map((v) => {
         return {
           value: v,
-          name: v
+          name: v,
         };
       });
     },
     positionOptionList() {
-      return POSITIONS.map(v => {
+      return POSITIONS.map((v) => {
         return {
           value: v,
-          name: v
+          name: v,
         };
       });
-    }
+    },
   },
   methods: {
     handleFile(e) {
@@ -181,11 +193,11 @@ export default {
           this.displaySnackbar({ message: "updated player" });
           this.$router.push({ name: "PlayersList" });
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           this.isSending = false;
         });
-    }
+    },
   },
   mounted() {
     // need to massage date data
@@ -195,9 +207,8 @@ export default {
       player.dob = new Date(this.player.dob);
       return { ...player };
     })();
-  }
+  },
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

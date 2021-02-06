@@ -1,17 +1,29 @@
 <template>
   <div class="login">
-    <form novalidate class="md-layout" @submit.prevent="validateUser">
+    <form novalidate class="md-layout" @submit.prevent="validateForm(login)">
       <md-card class="form-card">
-        <md-field>
+        <md-field :class="getValidationClass('email')">
           <label for="email">Email</label>
           <md-input name="email" type="email" v-model="form.email"></md-input>
+          <span class="md-error" v-if="!$v.form.email.required"
+            >Email is required</span
+          >
         </md-field>
-        <md-field>
+        <md-field :class="getValidationClass('password')">
           <label for="password">Password</label>
-          <md-input name="password" type="password" v-model="form.password"></md-input>
+          <md-input
+            name="password"
+            type="password"
+            v-model="form.password"
+          ></md-input>
+          <span class="md-error" v-if="!$v.form.password.required"
+            >Password is required</span
+          >
         </md-field>
         <md-card-actions>
-          <md-button type="submit" class="md-primary" :disabled="sending">Login</md-button>
+          <md-button type="submit" class="md-primary" :disabled="sending"
+            >Login</md-button
+          >
         </md-card-actions>
       </md-card>
     </form>
@@ -25,7 +37,8 @@
         class="md-primary"
         :disabled="sending"
         @click="loginWithGoogle"
-      >Login with Google</md-button>
+        >Login with Google</md-button
+      >
     </md-card>
   </div>
 </template>
@@ -33,37 +46,32 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, email } from "vuelidate/lib/validators";
+import validationMethods from "@/mixins/validationMethods";
 
 export default {
   name: "Login",
-  mixins: [validationMixin],
+  mixins: [validationMixin, validationMethods],
   data() {
     return {
       sending: false,
       form: {
         email: "",
-        password: ""
-      }
+        password: "",
+      },
     };
   },
   validations: {
     form: {
       email: {
         required,
-        email
+        email,
       },
       password: {
-        required
-      }
-    }
+        required,
+      },
+    },
   },
   methods: {
-    validateUser() {
-      this.$v.$touch();
-      if (!this.$v.$invalid) {
-        this.login();
-      }
-    },
     login() {
       this.$store.dispatch("users/login", this.form).then(() => {
         this.$router.push("/");
@@ -73,8 +81,8 @@ export default {
       this.$store.dispatch("users/loginWithGoogle").then(() => {
         this.$router.push("/");
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

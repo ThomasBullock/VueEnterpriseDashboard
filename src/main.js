@@ -5,7 +5,7 @@ import store from "./store";
 
 // Import Vue-Material
 import "vue-material/dist/vue-material.min.css";
-import "vue-material/dist/theme/default.css";
+import "vue-material/dist/theme/default-dark.css";
 
 // Global components / mixins
 import "@/components/global/global";
@@ -26,6 +26,8 @@ import {
   MdSnackbar,
   MdDialog,
   MdDivider,
+  MdIcon,
+  MdEmptyState,
 } from "vue-material/dist/components";
 Vue.use(MdAvatar);
 Vue.use(MdButton);
@@ -40,6 +42,8 @@ Vue.use(MdMenu);
 Vue.use(MdSnackbar);
 Vue.use(MdDialog);
 Vue.use(MdDivider);
+Vue.use(MdIcon);
+Vue.use(MdEmptyState);
 
 // Custom Styles
 import "@/styles/main.scss";

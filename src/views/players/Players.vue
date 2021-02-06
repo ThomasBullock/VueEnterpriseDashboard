@@ -1,12 +1,12 @@
 <template>
   <div class="players">
-    <nav>
-      <router-link class="sidebar-link" :to="{ name: 'PlayersList' }"
-        >Player List</router-link
-      >
-      <router-link class="sidebar-link" :to="{ name: 'NewPlayer' }"
-        >Add Player</router-link
-      >
+    <nav class="sidebar">
+      <router-link class="sidebar-link" :to="{ name: 'PlayersList' }">
+        Player List
+      </router-link>
+      <router-link class="sidebar-link" :to="{ name: 'NewPlayer' }">
+        Add Player
+      </router-link>
     </nav>
     <main>
       <router-view v-if="!isLoading"></router-view>
@@ -45,7 +45,6 @@ export default {
 
 <style lang="scss" scoped>
 .players {
-  padding: $base-spacing;
   display: flex;
 
   nav {
@@ -68,6 +67,11 @@ export default {
   justify-content: center;
   align-items: center;
   height: 90vh;
+}
+
+.sidebar {
+  padding-top: $large-spacing;
+  z-index: 0;
 }
 
 .sidebar-link {

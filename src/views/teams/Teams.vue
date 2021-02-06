@@ -11,7 +11,6 @@
           <img :src="team.logo" :alt="team.name + 'logo'" />
         </md-card-media>
       </md-card-header>
-
       <md-card-actions>
         <md-button :to="`/players/list?filter=${team._id}`"
           >View List</md-button
@@ -34,7 +33,7 @@ export default {
 
 <style lang="scss" scoped>
 .teams {
-  padding: $base-spacing * 2;
+  /* padding: $base-spacing * 2; */
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
