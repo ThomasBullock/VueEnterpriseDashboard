@@ -103,7 +103,11 @@
           >
         </md-select>
       </md-field>
-      <md-button type="submit" class="md-primary" :disabled="isCreating"
+      <md-progress-spinner
+        v-if="isCreating"
+        md-mode="indeterminate"
+      ></md-progress-spinner>
+      <md-button v-else type="submit" class="md-primary" :disabled="isCreating"
         >Create player</md-button
       >
     </form>
@@ -128,11 +132,11 @@ export default {
   data() {
     return {
       form: {
-        name: "",
-        surname: "",
-        height: null,
-        weight: null,
-        games: null,
+        name: "Baz",
+        surname: "Luurman",
+        height: 193,
+        weight: 93,
+        games: 2,
         goals: null,
         dob: null,
         teamId: null,
@@ -140,6 +144,7 @@ export default {
         img: null,
       },
       isCreating: false,
+      imgFieldTouched: false,
     };
   },
   validations: {
@@ -171,10 +176,10 @@ export default {
         required,
         numeric,
       },
-      goals: {
-        required,
-        numeric,
-      },
+      // goals: {
+      //   required,
+      //   numeric,
+      // },
       position: {
         required,
       },
@@ -217,18 +222,33 @@ export default {
       this.form.img = e[0];
     },
     createPlayer() {
+      console.log("create");
       this.isCreating = true;
-      this.$store
-        .dispatch("players/create", this.form)
-        .then(() => {
-          this.isCreating = false;
-          this.displaySnackbar({ message: "created player" });
-          this.$router.push({ name: "PlayersList" });
-        })
-        .catch((err) => {
-          console.log(err);
-          this.isCreating = false;
-        });
+      if (this.img) {
+        this.$store
+          .dispatch("players/uploadImage", this.form)
+          .then(() => {
+            this.isCreating = false;
+            this.displaySnackbar({ message: "created player" });
+            this.$router.push({ name: "PlayersList" });
+          })
+          .catch((err) => {
+            console.log(err);
+            this.isCreating = false;
+          });
+      } else {
+        this.$store
+          .dispatch("players/create", this.form)
+          .then(() => {
+            this.isCreating = false;
+            this.displaySnackbar({ message: "created player" });
+            this.$router.push({ name: "PlayersList" });
+          })
+          .catch((err) => {
+            console.log(err);
+            this.isCreating = false;
+          });
+      }
     },
   },
 };

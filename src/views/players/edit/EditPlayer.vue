@@ -70,7 +70,11 @@
           >
         </md-select>
       </md-field>
-      <md-button type="submit" class="md-primary" :disabled="isSending"
+      <md-progress-spinner
+        v-if="isSending"
+        md-mode="indeterminate"
+      ></md-progress-spinner>
+      <md-button v-else type="submit" class="md-primary" :disabled="isSending"
         >Update player</md-button
       >
     </form>
@@ -101,6 +105,7 @@ export default {
     return {
       form: {},
       isSending: false,
+      imgFieldChanged: false,
     };
   },
   validations: {
@@ -127,13 +132,13 @@ export default {
         required,
         numeric,
       },
-      goals: {
-        required,
-        numeric,
-      },
-      img: {
-        required,
-      },
+      // goals: {
+      //   required,
+      //   numeric,
+      // },
+      // img: {
+      //   required,
+      // },
       teamId: {
         required,
       },
@@ -173,6 +178,7 @@ export default {
       // Todo should delete existing photo
       console.log(e);
       this.form.img = e[0];
+      this.imgFieldChanged = true;
     },
     validate() {
       console.log("validate");
@@ -186,17 +192,31 @@ export default {
     updatePlayer() {
       console.log("updateuy!");
       this.isSending = true;
-      this.$store
-        .dispatch("players/updateOne", this.form)
-        .then(() => {
-          this.isSending = false;
-          this.displaySnackbar({ message: "updated player" });
-          this.$router.push({ name: "PlayersList" });
-        })
-        .catch((err) => {
-          console.log(err);
-          this.isSending = false;
-        });
+      if (this.imgFieldChanged) {
+        this.$store
+          .dispatch("players/uploadImage", this.form)
+          .then(() => {
+            this.isSending = false;
+            this.displaySnackbar({ message: "updated player" });
+            this.$router.push({ name: "PlayersList" });
+          })
+          .catch((err) => {
+            console.log(err);
+            this.isSending = false;
+          });
+      } else {
+        this.$store
+          .dispatch("players/updateOne", this.form)
+          .then(() => {
+            this.isSending = false;
+            this.displaySnackbar({ message: "updated player" });
+            this.$router.push({ name: "PlayersList" });
+          })
+          .catch((err) => {
+            console.log(err);
+            this.isSending = false;
+          });
+      }
     },
   },
   mounted() {

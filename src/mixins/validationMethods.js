@@ -11,6 +11,7 @@ export default {
     },
     validateForm(successFunction) {
       this.$v.$touch();
+      console.log("validateForm " + !this.$v.$invalid);
       if (!this.$v.$invalid) {
         successFunction.call(this);
       }

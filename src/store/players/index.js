@@ -26,9 +26,8 @@ const players = {
         return res;
       });
     },
-    create: ({ commit }, player) => {
-      console.log(commit, player);
-
+    uploadImage: ({ dispatch }, player) => {
+      console.log("upload Image");
       const photoForm = new FormData();
       photoForm.append("file", player.img);
       photoForm.append("api_key", process.env.VUE_APP_CLOUDINARY_KEY);
@@ -41,33 +40,28 @@ const players = {
         console.log(res);
         player.imgUrl = res.url;
         player.imgPublicId = res.public_id;
-        return api.players.post(player).then((res) => {
-          console.log(res);
-          commit("SET", [res.player]);
-          return res;
-        });
+        if (player._id) {
+          dispatch("updateOne", player);
+        } else {
+          dispatch("create", player);
+        }
+      });
+    },
+    create: ({ commit }, player) => {
+      console.log(commit, player);
+      return api.players.post(player).then((res) => {
+        console.log(res);
+        commit("SET", [res.player]);
+        return res;
       });
     },
     updateOne: ({ commit }, updatedPlayer) => {
       console.log(commit);
       console.log(updatedPlayer);
-
-      const photoForm = new FormData();
-      photoForm.append("file", updatedPlayer.img);
-      photoForm.append("api_key", process.env.VUE_APP_CLOUDINARY_KEY);
-      photoForm.append("upload_preset", process.env.VUE_APP_CLOUDINARY_PRESET);
-      photoForm.append("timestamp", (Date.now() / 1000) | 0);
-
-      console.log(photoForm);
-
-      return cloudinary.upload(photoForm).then((res) => {
-        updatedPlayer.imgUrl = res.url;
-        updatedPlayer.imgPublicId = res.public_id;
-        return api.players.put(updatedPlayer).then((res) => {
-          console.log(res);
-          commit("SET", [res]);
-          return res;
-        });
+      return api.players.put(updatedPlayer).then((res) => {
+        console.log(res);
+        commit("SET", [res]);
+        return res;
       });
     },
     delete: ({ commit }, id) => {
