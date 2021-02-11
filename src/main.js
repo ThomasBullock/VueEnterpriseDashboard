@@ -5,7 +5,7 @@ import store from "./store";
 
 // Import Vue-Material
 import "vue-material/dist/vue-material.min.css";
-import "vue-material/dist/theme/default-dark.css";
+// import "vue-material/dist/theme/default-dark.css";
 
 // Global components / mixins
 import "@/components/global/global";

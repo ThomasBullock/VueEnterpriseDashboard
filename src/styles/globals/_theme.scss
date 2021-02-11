@@ -1,0 +1,15 @@
+@import "~vue-material/dist/theme/engine"; // Import the theme engine
+
+@include md-register-theme(
+  "default",
+  (
+    primary: #36a69a,
+    //md-get-palette-color(blue, A200)
+      secondary: #338be1,
+    theme: dark // The primary color of your application,,,,,,,,,
+  )
+);
+
+@import "~vue-material/dist/theme/all"; // Apply the theme
+
+//      ,

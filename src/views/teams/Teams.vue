@@ -1,6 +1,6 @@
 <template>
   <div class="teams">
-    <md-card v-for="team in all" :key="team._id" class="team-card md-primary">
+    <md-card v-for="team in all" :key="team._id" class="team-card">
       <md-card-header>
         <md-card-header-text>
           <div class="md-title">{{ team.name }}</div>
@@ -12,7 +12,9 @@
         </md-card-media>
       </md-card-header>
       <md-card-actions>
-        <md-button :to="`/players/list?filter=${team._id}`"
+        <md-button
+          class="md-raised md-primary"
+          :to="`/players/list?filter=${team._id}`"
           >View List</md-button
         >
       </md-card-actions>
@@ -37,10 +39,14 @@ export default {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  margin: -12px 0 0 -12px;
+  width: calc(100% + 12px);
+  padding: $base-spacing;
 }
 
 .team-card {
   flex: 1 1 25%;
+  margin: 12px 0 0 12px;
 
   &__logo {
     background: $white;

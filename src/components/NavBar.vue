@@ -53,6 +53,7 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
+  background-color: $slate-grey;
   padding: 0 $base-spacing;
   z-index: 1;
   position: relative;

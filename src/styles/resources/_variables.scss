@@ -20,6 +20,10 @@ $oil: #333333 !default;
 $jet: #222222 !default;
 $black: #000000 !default;
 
+$slate-grey: #324148;
+$oil-slick: #263238;
+$gun-metal: #3c474b;
+
 // function to convert media px statements to em.
 @function media-px-to-em($px) {
   @return $px / ($px * 0 + 1) / 16 * 1em;
