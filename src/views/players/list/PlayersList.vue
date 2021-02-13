@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     teamsOptionList() {
-      return Object.entries(this.$store.getters["teams/all"])
+      return Object.entries(this.$store.getters["teams/allTeams"])
         .map(([, v]) => {
           return {
             value: v._id,

@@ -1,6 +1,6 @@
 <template>
   <div class="teams">
-    <md-card v-for="team in all" :key="team._id" class="team-card">
+    <md-card v-for="team in allTeams" :key="team._id" class="team-card">
       <md-card-header>
         <md-card-header-text>
           <div class="md-title">{{ team.name }}</div>
@@ -28,7 +28,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "Teams",
   computed: {
-    ...mapGetters("teams", ["all"]),
+    ...mapGetters("teams", ["allTeams"]),
   },
 };
 </script>

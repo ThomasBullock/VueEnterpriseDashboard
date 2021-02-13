@@ -149,12 +149,14 @@ export default {
       return this.$store.getters["players/getById"](this.playerId);
     },
     teamsOptionList() {
-      return Object.entries(this.$store.getters["teams/all"]).map(([, v]) => {
-        return {
-          value: v._id,
-          name: v.name,
-        };
-      });
+      return Object.entries(this.$store.getters["teams/allTeams"]).map(
+        ([, v]) => {
+          return {
+            value: v._id,
+            name: v.name,
+          };
+        }
+      );
     },
     statusOptionList() {
       return STATUSES.map((v) => {

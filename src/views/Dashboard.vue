@@ -1,9 +1,14 @@
 <template>
   <div class="dashboard">
     <NavBar />
-    <router-view v-if="dashboardReady" />
-    <div class="spinner-wrapper" v-else>
-      <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
+    <div class="dashboard__container">
+      <SideBar />
+      <main>
+        <router-view v-if="dashboardReady" />
+        <div class="spinner-wrapper" v-else>
+          <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
+        </div>
+      </main>
     </div>
   </div>
 </template>
@@ -11,12 +16,14 @@
 <script>
 // @ is an alias to /src
 import NavBar from "@/components/NavBar";
+import SideBar from "@/components/SideBar";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Dashboard",
   components: {
     NavBar,
+    SideBar,
   },
   data() {
     return {
@@ -25,7 +32,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters("teams", ["all"]),
+    ...mapGetters("teams", ["allTeams"]),
     dashboardReady() {
       return (
         this.$store.state.dashboardIsLoaded && !this.$store.state.isLoading
@@ -40,6 +47,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.dashboard {
+  &__container {
+    display: flex;
+  }
+}
+
 .spinner-wrapper {
   display: flex;
   justify-content: center;

@@ -20,7 +20,7 @@ const teams = {
     },
   },
   getters: {
-    all: (state) => {
+    allTeams: (state) => {
       return state;
     },
     teamById: (state) => (id) => {

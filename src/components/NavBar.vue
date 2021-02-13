@@ -9,7 +9,10 @@
       <md-menu md-size="big" md-direction="bottom-end">
         <md-button class="md-icon-button" md-menu-trigger>
           <md-avatar>
-            <img :src="userData.avatar" :alt="userData.name + ' avatar '" />
+            <img
+              :src="userData.avatar || DEFAULT_PLAYER_IMG"
+              :alt="userData.name + ' avatar '"
+            />
           </md-avatar>
           <!-- <md-icon>account_circle</md-icon> -->
         </md-button>
@@ -32,9 +35,15 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { DEFAULT_PLAYER_IMG } from "@/constants";
 
 export default {
   name: "NavBar",
+  data() {
+    return {
+      DEFAULT_PLAYER_IMG: DEFAULT_PLAYER_IMG,
+    };
+  },
   computed: {
     ...mapGetters("users", ["userData"]),
   },
