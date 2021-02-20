@@ -1,5 +1,9 @@
 <template>
   <div class="new-player">
+    <PageHeader
+      title="Add player"
+      :linkAction="{ linkName: 'PlayersList', linkText: 'Back' }"
+    />
     <form @submit.prevent="validateForm(createPlayer)">
       <md-field :class="getValidationClass('name')">
         <label for="name">Name</label>
@@ -115,6 +119,7 @@
 </template>
 
 <script>
+import PageHeader from "@/components/common/PageHeader";
 import { validationMixin } from "vuelidate";
 import {
   required,
@@ -128,6 +133,9 @@ import validationMethods from "@/mixins/validationMethods";
 
 export default {
   name: "NewPlayer",
+  components: {
+    PageHeader,
+  },
   mixins: [validationMixin, validationMethods],
   data() {
     return {

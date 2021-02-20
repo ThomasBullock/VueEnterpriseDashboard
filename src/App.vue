@@ -1,13 +1,17 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <router-view />
     <SnackBar />
   </div>
 </template>
 <script>
 export default {
-  name: "App"
+  name: "App",
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.app {
+  height: 100vh;
+}
+</style>

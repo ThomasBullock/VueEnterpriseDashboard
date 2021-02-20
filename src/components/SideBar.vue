@@ -14,16 +14,6 @@ export default {
   data() {
     return {
       menu: [
-        // {
-        //   header: true,
-        //   title: "Main Navigation",
-        //   hiddenOnCollapse: true,
-        // },
-        // {
-        //   href: "/",
-        //   title: "Dashboard",
-        //   icon: "fa fa-user",
-        // },
         {
           href: "/teams",
           title: "Teams",
@@ -54,7 +44,7 @@ export default {
     teamLinks() {
       return Object.values(this.allTeams).map((v) => {
         return {
-          href: "/teams/" + v._id,
+          href: "/teams/" + v.slug,
           title: v.name,
         };
       });
@@ -74,7 +64,7 @@ export default {
 <style lang="scss">
 .v-sidebar-menu .vsm--link {
   display: block;
-  padding: $base-spacing;
+  padding: $base-spacing $base-spacing $base-spacing $base-spacing * 2;
   color: $white !important;
 
   &:hover {

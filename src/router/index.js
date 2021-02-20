@@ -63,7 +63,48 @@ const routes = [
       {
         path: "/teams",
         name: "Teams",
+        redirect: { name: "TeamsList" },
         component: Teams,
+        children: [
+          {
+            path: "list",
+            name: "TeamsList",
+            props: () => {
+              return { teams: store.getters["teams/allTeams"] };
+            },
+            component: () =>
+              import(
+                /* webpackChunkName: "new-player" */ "../views/teams/list/TeamsList.vue"
+              ),
+          },
+          {
+            path: ":slug",
+            name: "Team",
+            // routeToReplace: "Teams",
+            props: (route) => {
+              return {
+                team: store.getters["teams/teamBySlug"](route.params.slug),
+              };
+            },
+            component: () =>
+              import(
+                /* webpackChunkName: "new-player" */ "../views/teams/team/Team.vue"
+              ),
+          },
+          {
+            path: "edit/:slug",
+            name: "EditTeam",
+            props: (route) => {
+              return {
+                team: store.getters["teams/teamBySlug"](route.params.slug),
+              };
+            },
+            component: () =>
+              import(
+                /* webpackChunkName: "edit-team" */ "../views/teams/edit/EditTeam.vue"
+              ),
+          },
+        ],
       },
       {
         path: "/insights",

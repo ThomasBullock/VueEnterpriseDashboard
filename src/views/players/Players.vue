@@ -1,19 +1,19 @@
 <template>
   <div class="players">
-    <nav class="sidebar">
+    <!-- <nav class="sidebar">
       <router-link class="sidebar-link" :to="{ name: 'PlayersList' }">
         Player List
       </router-link>
       <router-link class="sidebar-link" :to="{ name: 'NewPlayer' }">
         Add Player
       </router-link>
-    </nav>
-    <main>
-      <router-view v-if="!isLoading"></router-view>
-      <div class="spinner-wrapper" v-else>
-        <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
-      </div>
-    </main>
+    </nav> -->
+    <!-- <main> -->
+    <router-view v-if="!isLoading"></router-view>
+    <div class="spinner-wrapper" v-else>
+      <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
+    </div>
+    <!-- </main> -->
   </div>
 </template>
 
@@ -45,7 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 .players {
-  display: flex;
+  padding: $large-spacing $large-spacing * 2;
 
   nav {
     background: $white;
@@ -53,11 +53,6 @@ export default {
     display: flex;
     flex-direction: column;
     padding-right: $base-spacing;
-  }
-
-  main {
-    flex: 1 1 80%;
-    padding: $base-spacing $large-spacing;
   }
 }
 

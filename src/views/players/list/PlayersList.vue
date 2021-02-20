@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1 class="page-heading">Players</h1>
+    <PageHeader
+      title="Players List"
+      :linkAction="{ linkName: 'NewPlayer', linkText: 'Add Player' }"
+    />
     <md-field>
       <label for="team">Team</label>
       <md-select v-model="filter" name="team" id="team">
@@ -48,6 +51,7 @@
 
 <script>
 import EmptyState from "@/components/EmptyState";
+import PageHeader from "@/components/common/PageHeader";
 import { DEFAULT_PLAYER_IMG } from "@/constants";
 
 export default {
@@ -60,6 +64,7 @@ export default {
   },
   components: {
     EmptyState,
+    PageHeader,
   },
   data() {
     return {

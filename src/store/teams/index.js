@@ -26,6 +26,9 @@ const teams = {
     teamById: (state) => (id) => {
       return state[id];
     },
+    teamBySlug: (state) => (slug) => {
+      return Object.values(state).find((team) => team.slug === slug);
+    },
   },
 };
 

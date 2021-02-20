@@ -79,6 +79,9 @@ const players = {
     getById: (state) => (id) => {
       return state[id];
     },
+    playerByTeamId: (state) => (id) => {
+      return Object.values(state).filter((player) => player.teamId == id);
+    },
   },
 };
 
