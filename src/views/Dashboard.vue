@@ -3,7 +3,7 @@
     <NavBar />
     <div class="dashboard__container">
       <SideBar />
-      <main>
+      <main class="dashboard__main">
         <router-view v-if="dashboardReady" />
         <div class="spinner-wrapper" v-else>
           <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
@@ -48,8 +48,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 .dashboard {
+  height: 100%;
   &__container {
     display: flex;
+
+    height: calc(100% - #{$navbar-height});
+  }
+
+  &__main {
+    width: 100%;
   }
 }
 

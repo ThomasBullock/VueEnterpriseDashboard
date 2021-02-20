@@ -1,23 +1,27 @@
 <template>
   <div class="account">
-    <h1>My Account</h1>
+    <PageHeader title="User Account" />
     <h2>{{ userData.name }}</h2>
   </div>
 </template>
 
 <script>
+import PageHeader from "@/components/common/PageHeader";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Account",
+  components: {
+    PageHeader,
+  },
   computed: {
-    ...mapGetters("users", ["userData"])
-  }
+    ...mapGetters("users", ["userData"]),
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .account {
-  padding: $base-spacing;
+  padding: $large-spacing $large-spacing * 2;
 }
 </style>
