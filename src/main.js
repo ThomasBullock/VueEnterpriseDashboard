@@ -28,6 +28,9 @@ import {
   MdDivider,
   MdIcon,
   MdEmptyState,
+  MdChips,
+  MdTable,
+  MdRipple,
 } from "vue-material/dist/components";
 Vue.use(MdAvatar);
 Vue.use(MdButton);
@@ -44,6 +47,9 @@ Vue.use(MdDialog);
 Vue.use(MdDivider);
 Vue.use(MdIcon);
 Vue.use(MdEmptyState);
+Vue.use(MdChips);
+Vue.use(MdTable);
+Vue.use(MdRipple);
 
 // Custom Styles
 import "@/styles/main.scss";

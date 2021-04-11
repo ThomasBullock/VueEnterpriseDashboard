@@ -4,25 +4,29 @@ import Vue from "vue";
 
 const players = {
   namespaced: true,
-  state: {},
+  state: {
+    items: {},
+    isMakingRequest: false,
+    isLoaded: false,
+  },
   mutations: {
     SET(state, data) {
-      console.log(data);
       data.forEach((item) => {
-        Vue.set(state, item._id, item);
-        // state[item._id] = item;
+        Vue.set(state.items, item._id, item);
       });
     },
     DELETE(state, id) {
-      console.log(id);
-      Vue.delete(state, id);
+      Vue.delete(state.items, id);
+    },
+    SET_IS_LOADED(state, payload) {
+      state.isLoaded = payload;
     },
   },
   actions: {
     getAll: ({ commit }) => {
-      console.log("yep", commit);
       return api.players.getAll().then((res) => {
         commit("SET", res);
+        commit("SET_IS_LOADED", true);
         return res;
       });
     },
@@ -73,14 +77,17 @@ const players = {
     },
   },
   getters: {
-    all: (state) => {
-      return state;
+    playersIsLoaded: (state) => {
+      return state.isLoaded;
+    },
+    allPlayers: (state) => {
+      return state.items;
     },
     getById: (state) => (id) => {
-      return state[id];
+      return state.items[id];
     },
     playerByTeamId: (state) => (id) => {
-      return Object.values(state).filter((player) => player.teamId == id);
+      return Object.values(state.items).filter((player) => player.teamId == id);
     },
   },
 };

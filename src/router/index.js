@@ -84,6 +84,7 @@ const routes = [
             props: (route) => {
               return {
                 team: store.getters["teams/teamBySlug"](route.params.slug),
+                teamId: store.getters["teams/teamIdBySlug"](route.params.slug),
               };
             },
             component: () =>
@@ -124,7 +125,7 @@ const routes = [
             path: "list",
             name: "PlayersList",
             props: () => {
-              return { players: store.getters["players/all"] };
+              return { players: store.getters["players/allPlayers"] };
             },
             component: () =>
               import(

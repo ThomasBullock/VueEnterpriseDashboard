@@ -29,7 +29,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("players", ["all"]),
+    ...mapGetters("players", ["allPlayers"]),
   },
   created() {
     if (isEmpty(this.all)) {
@@ -54,14 +54,6 @@ export default {
     flex-direction: column;
     padding-right: $base-spacing;
   }
-}
-
-// move this into global at some point
-.spinner-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
 }
 
 .sidebar {

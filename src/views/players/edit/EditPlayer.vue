@@ -17,10 +17,22 @@
       <md-field :class="getValidationClass('number')">
         <label for="number">Number</label>
         <md-input name="number" type="number" v-model="form.number"></md-input>
+        <span class="md-error" v-if="!$v.form.number.required"
+          >The players number is required</span
+        >
       </md-field>
       <md-field :class="getValidationClass('height')">
         <label for="height">Height</label>
         <md-input name="height" type="height" v-model="form.height"></md-input>
+        <span
+          class="md-error"
+          v-if="!$v.form.height.required || !$v.form.height.between"
+          >{{
+            !$v.form.height.between
+              ? "Height must be realistic!"
+              : "The players height is required"
+          }}</span
+        >
       </md-field>
       <md-field :class="getValidationClass('games')">
         <label for="games">Games</label>

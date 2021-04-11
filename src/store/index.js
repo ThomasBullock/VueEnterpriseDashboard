@@ -34,8 +34,6 @@ export default new Vuex.Store({
       api
         .fetchDashboard("/dashboard")
         .then((res) => {
-          console.log(res, commit);
-          console.log(res.user);
           commit("users/SET_USER", res.user, { root: true });
           commit("teams/SET", res.teams, { root: true });
           commit("SET_DASHBOARD_IS_LOADED");

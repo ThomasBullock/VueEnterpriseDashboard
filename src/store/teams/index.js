@@ -5,7 +5,6 @@ const teams = {
   state: {},
   mutations: {
     SET(state, data) {
-      console.log(data);
       data.forEach((item) => {
         state[item._id] = item;
       });
@@ -28,6 +27,10 @@ const teams = {
     },
     teamBySlug: (state) => (slug) => {
       return Object.values(state).find((team) => team.slug === slug);
+    },
+    teamIdBySlug: (state) => (slug) => {
+      const team = Object.values(state).find((team) => team.slug === slug);
+      return team._id;
     },
   },
 };

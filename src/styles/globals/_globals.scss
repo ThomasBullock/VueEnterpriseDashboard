@@ -32,6 +32,13 @@ body {
   margin-top: 0;
 }
 
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
 /******************* 
   Utility Classes
 *******************/
