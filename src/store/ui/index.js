@@ -3,8 +3,8 @@ const ui = {
   state: {
     snackbar: {
       visible: false,
-      duration: null,
       message: "",
+      type: null,
     },
   },
   getters: {
@@ -19,17 +19,17 @@ const ui = {
     RESET_SNACKBAR(state) {
       state.snackbar = {
         visible: false,
-        duration: null,
         message: "",
+        type: null,
       };
     },
   },
   actions: {
     displaySnackbar: (
       { commit },
-      { visible = true, duration = 4000, message }
+      { visible = true, type = "notfication", message }
     ) => {
-      commit("SET_SNACKBAR", { visible, duration, message });
+      commit("SET_SNACKBAR", { visible, type, message });
     },
   },
 };

@@ -27,6 +27,9 @@
           <md-table-cell md-label="Height" md-sort-by="height">{{
             item.height
           }}</md-table-cell>
+          <md-table-cell md-label="Weight" md-sort-by="weight">{{
+            item.weight
+          }}</md-table-cell>
           <md-table-cell md-label="Games" md-sort-by="games">{{
             item.games
           }}</md-table-cell>
